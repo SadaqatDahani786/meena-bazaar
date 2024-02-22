@@ -1,7 +1,4 @@
-import { useEffect } from 'react'
-
 import styled from 'styled-components'
-import feather from 'feather-icons'
 
 //Hooks
 import useTheme from '../../hooks/useTheme'
@@ -45,11 +42,6 @@ const ButtonStyled = styled.button`
   }
 `
 
-//Icon
-const Icon = styled.div`
-  color: inherit;
-`
-
 /*
  ** ** =========================================================================
  ** ** ** Component [Button]
@@ -63,6 +55,7 @@ const Button = ({
   corners = 'default',
   iconStart,
   iconEnd,
+  onClick,
   children,
 }) => {
   /*
@@ -82,31 +75,18 @@ const Button = ({
     sm: {
       padding: '4px 10px',
       text: '0.85rem',
-      icon: '18px',
     },
     md: {
       padding: '8px 16px',
       text: '0.92rem',
-      icon: '20px',
     },
     lg: {
       padding: '12px 22px',
       text: '0.96rem',
-      icon: '22px',
     },
   }
   const selectedPalette = colorPalettes[color]
   const selectedSize = sizes[size]
-
-  /*
-   ** **
-   ** ** ** Effects
-   ** **
-   */
-  //Init feather
-  useEffect(() => {
-    feather.replace({ width: selectedSize.icon, height: selectedSize.icon })
-  }, [selectedSize])
 
   return (
     <ButtonStyled
@@ -115,10 +95,11 @@ const Button = ({
       $variant={variant}
       $palette={selectedPalette}
       $size={selectedSize}
+      onClick={onClick}
     >
-      {iconStart && <Icon date-size="10px" data-feather={iconStart}></Icon>}
+      {iconStart && iconStart}
       {children}
-      {iconEnd && <Icon date-size="10px" data-feather={iconEnd}></Icon>}
+      {iconEnd && iconEnd}
     </ButtonStyled>
   )
 }
